@@ -15,7 +15,8 @@ st.markdown(f"""
 
 st.write("---")
 
-# 2. الأسعار العالمية
+# 2. الأسعار العالمية وعرض سعر الغرام بالدرهم
+st.markdown("<h3 style='color: #D4AF37;'>💰 أسعار الذهب اللحظية (AED)</h3>", unsafe_allow_html=True)
 ounce_price = st.number_input("أدخل سعر الأونصة ($):", value=2025.0)
 
 usd_to_aed = 3.6725
@@ -23,9 +24,18 @@ g24 = (ounce_price / 31.1035) * usd_to_aed
 g21 = g24 * 0.875
 g18 = g24 * 0.75
 
+# عرض العيارات كما في النسخ الأولى
+col1, col2, col3 = st.columns(3)
+col1.metric("عيار 24", f"{g24:.2f}")
+col2.metric("عيار 21", f"{g21:.2f}")
+col3.metric("عيار 18", f"{g18:.2f}")
+
+st.write("---")
+
 # 3. مدخلات الحسبة
-karat = st.selectbox("اختر العيار:", ["21", "18", "24"])
-weights = st.text_input("أدخل الأوزان (مثلاً 10+5):", value="0")
+st.markdown("<h3 style='color: #D4AF37;'>⚖️ تفاصيل الحسبة المفصلة</h3>", unsafe_allow_html=True)
+karat = st.selectbox("اختر العيار المطلوب:", ["21", "18", "24"])
+weights = st.text_input("أدخل الأوزان (مثلاً 12.5+3):", value="0")
 
 total_w = 0.0
 try:
@@ -44,18 +54,18 @@ total_making = making_per_gram * total_w      # مجموع المصنعية لح
 tax_amount = (gold_only_total + total_making) * 0.05 # الضريبة لحال
 grand_total = gold_only_total + total_making + tax_amount # الإجمالي النهائي
 
-# 4. عرض الفاتورة المفصلة (فوق بعض)
+# 4. عرض الفاتورة النهائية المرتبة رأسياً
 st.write("---")
 st.markdown(f"""
 <div style='text-align: center; border: 2px solid #D4AF37; padding: 25px; border-radius: 20px; background-color: #ffffff;'>
     <div style='text-align: right; display: inline-block; width: 100%; direction: rtl;'>
         <p style='color: #333; font-size: 18px;'>⚖️ الوزن الإجمالي: <b>{total_w:.2f} غرام</b></p>
-        <p style='color: #333; font-size: 18px;'>💰 قيمة الذهب (بدون إضافات): <b>{gold_only_total:.2f} درهم</b></p>
+        <p style='color: #333; font-size: 18px;'>💰 قيمة الذهب (عيار {karat}): <b>{gold_only_total:.2f} درهم</b></p>
         <p style='color: #333; font-size: 18px;'>🛠️ مجموع المصنعية: <b>{total_making:.2f} درهم</b></p>
         <p style='color: #333; font-size: 18px;'>📜 ضريبة القيمة المضافة (5%): <b>{tax_amount:.2f} درهم</b></p>
     </div>
     <hr style='border: 1px solid #D4AF37; margin: 20px 0;'>
-    <p style='color: #555; font-size: 22px; font-weight: bold;'>الإجمالي النهائي (شامل كل شيء):</p>
-    <h1 style='color: #D4AF37; font-size: 50px; margin: 0;'>{grand_total:.2f} درهم</h1>
+    <p style='color: #555; font-size: 20px;'>الإجمالي النهائي شامل الضريبة:</p>
+    <h1 style='color: #D4AF37; font-size: 48px; margin: 0;'>{grand_total:.2f} درهم</h1>
 </div>
 """, unsafe_allow_html=True)
