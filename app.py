@@ -22,7 +22,7 @@ ounce_price = st.number_input("أدخل سعر الأونصة العالمي ($)
 
 usd_to_aed = 3.6725
 gram_24 = (ounce_price / 31.1035) * usd_to_aed
-gram_21 = gram_24 * 0.875
+gram_21 = gram_24 * 0.880
 gram_18 = gram_24 * 0.75
 
 # عرض أسعار الغرام بوضوح في الأعلى
@@ -67,4 +67,5 @@ st.markdown(f"""
     <h1 style='color: #D4AF37; font-size: 45px; margin: 0;'>{grand_total:.2f} درهم</h1>
 </div>
 """, unsafe_allow_html=True)
+
 
