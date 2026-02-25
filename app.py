@@ -17,11 +17,11 @@ st.write("---")
 
 # 2. الأسعار العالمية وعرض سعر الغرام بالدرهم
 st.markdown("<h3 style='color: #D4AF37;'>💰 أسعار الذهب اللحظية (AED)</h3>", unsafe_allow_html=True)
-ounce_price = st.number_input("أدخل سعر الأونصة ($):", value=2025.0)
+ounce_price = st.number_input("أدخل سعر الأونصة ($):", value=0000.0)
 
 usd_to_aed = 3.6725
 g24 = (ounce_price / 31.1035) * usd_to_aed
-g21 = g24 * 0.875
+g21 = g24 * 0.880
 g18 = g24 * 0.75
 
 # عرض العيارات كما في النسخ الأولى
@@ -69,3 +69,4 @@ st.markdown(f"""
     <h1 style='color: #D4AF37; font-size: 48px; margin: 0;'>{grand_total:.2f} درهم</h1>
 </div>
 """, unsafe_allow_html=True)
+
